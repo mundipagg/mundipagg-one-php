@@ -176,10 +176,29 @@ try
     // Faz a chamada para criação do token
     //$createSaleResponse = $apiClient->createSale($createSaleRequest);
 
-    $response = $apiClient->searchSaleByOrderKey("42DCBB2E-E9AF-42FC-8239-C9038F661B5C");
+
+    //Criando Requisição do Retry
+    $retryRequest = new \MundiPagg\One\DataContract\Request\RetryRequest();
+
+    // Dados da transação de cartão de crédito
+    $retryRequest->setOrderKey('32F1A28C-7D3F-4874-A896-8D313861F97D');
+    $creditCardTransaction = new \MundiPagg\One\DataContract\Request\RetryRequestData\RetrySaleCreditCardTransaction();
+    $creditCardTransaction->setSecurityCode('999');
+    $creditCardTransaction->setTransactionKey('A2C49022-42E8-4F1B-B069-E5BDBBCE16A8');
+
+
+    $retryRequest->addRetrySaleCreditCardTransactionCollection($creditCardTransaction);
+
+
+
+    //$response = $apiClient->Retry($retryRequest);
+
+    //$response = $apiClient->searchSaleByCreditCardTransactionKey("5CD6FFEF-184C-4343-BD45-5610DC8A6D4D"); //Requisição do Query
+
+    //$response = $apiClient->createSale($createSaleRequest); //Requisição do CreateSale
 
     //print "<pre>";
-    //echo var_dump($createSaleResponse, JSON_PRETTY_PRINT);
+    //    print var_dump($response->getData());
     //print "</pre>";
 
     // Imprime json

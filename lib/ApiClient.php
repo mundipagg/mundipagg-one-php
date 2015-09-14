@@ -349,16 +349,10 @@ class ApiClient
      */
     public function searchSaleByOrderReference($orderReference)
     {
-        // Monta o parametro
-        $resource = sprintf("sale/query/orderreference=%s", $orderReference);
-
-        // Dispara a requisição
-        $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
-
         // Cria objeto de resposta
-        $response = new BaseResponse(true, $queryResponse);
+        $response = $this->QueryImplementation('orderreference', $orderReference);
 
-        // Retorna rsposta
+        // Retorna resposta
         return $response;
     }
 
@@ -369,8 +363,45 @@ class ApiClient
      */
     public function searchSaleByOrderKey($orderKey)
     {
+        // Cria objeto de resposta
+        $response = $this->QueryImplementation('orderkey', $orderKey);
+
+        // Retorna resposta
+        return $response;
+    }
+
+    public function Retry(One\DataContract\Request\RetryRequest $retryRequest)
+    {
+        // Dispara a requisição
+        $retryResponse = $this->sendRequest(ApiResourceEnum::RETRY, ApiMethodEnum::POST, $retryRequest->getData());
+
+        // Verifica sucesso
+        if (empty($retryResponse->CreditCardTransactionResultCollection))
+        {
+            $isSuccess = false;
+        }
+        else
+        {
+            $isSuccess = true;
+        }
+
+        // Cria objeto de resposta
+        $response = new BaseResponse($isSuccess, $retryResponse);
+
+        // Retorna reposta
+        return $response;
+    }
+
+    /**
+     * @param $method
+     * @param $key
+     * @return BaseResponse
+     * @throws \Exception
+     */
+    private function QueryImplementation($method, $key)
+    {
         // Monta o parametro
-        $resource = sprintf("sale/query/orderkey=%s", $orderKey);
+        $resource = sprintf("sale/query/%s=%s", $method, $key);
 
         // Dispara a requisição
         $queryResponse = $this->sendRequest($resource, ApiMethodEnum::GET);
