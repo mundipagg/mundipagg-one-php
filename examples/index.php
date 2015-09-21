@@ -5,9 +5,9 @@ require_once(dirname(__FILE__) . '/../bootstrap.php');
 
 try {
     //ApiClient::setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::SANDBOX);
-    //ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
+    ApiClient::setMerchantKey("be43cb17-3637-44d0-a45e-d68aaee29f47");
     //ApiClient::setMerchantKey("8A2DD57F-1ED9-4153-B4CE-69683EFADAD5"); // SANDBOX MERCHANT
-    ApiClient::setMerchantKey("41BE3484-9CD4-4332-98B1-145DAEBE7CCB"); // SANDBOX MERCHANT APIV1
+    //ApiClient::setMerchantKey("41BE3484-9CD4-4332-98B1-145DAEBE7CCB"); // SANDBOX MERCHANT APIV1
 
     // Cria objeto de solicitação
     $createSaleRequest = new \MundiPagg\One\DataContract\Request\CreateSaleRequest();
@@ -228,12 +228,13 @@ try {
 </StatusNotification>'));
 
     $apiClient->setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
+
     //$postObject = $apiClient->ParseXmlToStatusNotification($xmlToPost);
 
     //echo '<pre>' . var_dump($postObject) . '<pre/>';
-    //$response = $apiClient->DownloadTransactionReportFile('20150321');
+    $apiClient->DownloadTransactionReportFile('20150321');
 
-    $response = $apiClient->searchTransactionReportFile('20150321');
+    //$response = $apiClient->searchTransactionReportFile('20150321');
 
     //echo var_dump($response);
 

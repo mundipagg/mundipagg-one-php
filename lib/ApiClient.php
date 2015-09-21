@@ -400,6 +400,7 @@ class ApiClient
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
         header("Content-Length: " . strlen($reportResponse));
 
+        echo $reportResponse;
         exit;
     }
 
@@ -418,35 +419,35 @@ class ApiClient
             switch ($lineProperties[0]) {
                 case "01":
                     $header = new One\DataContract\TransactionReport\TransactionReportData\Header();
-                    $header->setTransactionProcessedDate($lineProperties[1]);
-                    $header->setReportFileCreateDate($lineProperties[2]);
-                    $header->setVersion($lineProperties[3]);
+                    $header->setTransactionProcessedDate($lineProperties[1])
+                        ->setReportFileCreateDate($lineProperties[2])
+                        ->setVersion($lineProperties[3]);
                     $response->setHeader($header);
                     break;
                 case "20":
                     $creditCardTransaction = new One\DataContract\TransactionReport\TransactionReportData\TransactionReportCreditCardTransaction();
                     $transactionReportOrder = new One\DataContract\TransactionReport\TransactionReportData\TransactionReportOrder();
 
-                    $transactionReportOrder->setOrderKey($lineProperties[1]);
-                    $transactionReportOrder->setOrderReference($lineProperties[2]);
-                    $transactionReportOrder->setMerchantKey($lineProperties[3]);
-                    $transactionReportOrder->setMerchantName($lineProperties[4]);
+                    $transactionReportOrder->setOrderKey($lineProperties[1])
+                        ->setOrderReference($lineProperties[2])
+                        ->setMerchantKey($lineProperties[3])
+                        ->setMerchantName($lineProperties[4]);
 
                     $creditCardTransaction->setOrder($transactionReportOrder);
 
-                    $creditCardTransaction->setTransactionKey($lineProperties[5]);
-                    $creditCardTransaction->setTransactionKeyToAcquirer($lineProperties[6]);
-                    $creditCardTransaction->setCreditCardTransactionReference($lineProperties[7]);
-                    $creditCardTransaction->setCreditCardBrand($lineProperties[8]);
-                    $creditCardTransaction->setCreditCardNumber($lineProperties[9]);
+                    $creditCardTransaction->setTransactionKey($lineProperties[5])
+                        ->setTransactionKeyToAcquirer($lineProperties[6])
+                        ->setCreditCardTransactionReference($lineProperties[7])
+                        ->setCreditCardBrand($lineProperties[8])
+                        ->setCreditCardNumber($lineProperties[9]);
                     ($lineProperties[10] == false) ? $creditCardTransaction->setInstallmentCount($lineProperties[10]) : 0;
-                    $creditCardTransaction->setAcquirerName($lineProperties[11]);
-                    $creditCardTransaction->setStatus($lineProperties[12]);
+                    $creditCardTransaction->setAcquirerName($lineProperties[11])
+                        ->setStatus($lineProperties[12]);
                     ($lineProperties[13] == false) ? $creditCardTransaction->setAmountInCents($lineProperties[13]) : 0;
                     ($lineProperties[14] == false) ? $creditCardTransaction->setIataAmountInCents($lineProperties[14]) : 0;
-                    $creditCardTransaction->setAuthorizationCode($lineProperties[15]);
-                    $creditCardTransaction->setTransactionIdentifier($lineProperties[16]);
-                    $creditCardTransaction->setUniqueSequentialNumber($lineProperties[17]);
+                    $creditCardTransaction->setAuthorizationCode($lineProperties[15])
+                        ->setTransactionIdentifier($lineProperties[16])
+                        ->setUniqueSequentialNumber($lineProperties[17]);
                     ($lineProperties[18] == false) ? $creditCardTransaction->setAuthorizedAmountInCents($lineProperties[18]) : 0;
                     ($lineProperties[19] == false) ? $creditCardTransaction->setCapturedAmountInCents($lineProperties[19]) : 0;
                     ($lineProperties[20] == false) ? $creditCardTransaction->setVoidedAmountInCents($lineProperties[20]) : 0;
@@ -463,22 +464,22 @@ class ApiClient
                     $boletoTransaction = new One\DataContract\TransactionReport\TransactionReportData\TransactionReportBoletoTransaction();
                     $transactionReportOrder = new One\DataContract\TransactionReport\TransactionReportData\TransactionReportOrder();
 
-                    $transactionReportOrder->setOrderKey($lineProperties[1]);
-                    $transactionReportOrder->setOrderReference($lineProperties[2]);
-                    $transactionReportOrder->setMerchantKey($lineProperties[3]);
-                    $transactionReportOrder->setMerchantName($lineProperties[4]);
+                    $transactionReportOrder->setOrderKey($lineProperties[1])
+                        ->setOrderReference($lineProperties[2])
+                        ->setMerchantKey($lineProperties[3])
+                        ->setMerchantName($lineProperties[4]);
                     $boletoTransaction->setOrder($transactionReportOrder);
 
-                    $boletoTransaction->setTransactionKey($lineProperties[5]);
-                    $boletoTransaction->setTransactionReference($lineProperties[6]);
-                    $boletoTransaction->setStatus($lineProperties[7]);
-                    $boletoTransaction->setNossoNumero($lineProperties[8]);
-                    $boletoTransaction->setBankNumber($lineProperties[9]);
-                    $boletoTransaction->setAgency($lineProperties[10]);
-                    $boletoTransaction->setAccount($lineProperties[11]);
-                    $boletoTransaction->setBarCode($lineProperties[12]);
-                    $boletoTransaction->setExpirationDate($lineProperties[13]);
-                    $boletoTransaction->setAmountInCents($lineProperties[14]);
+                    $boletoTransaction->setTransactionKey($lineProperties[5])
+                        ->setTransactionReference($lineProperties[6])
+                        ->setStatus($lineProperties[7])
+                        ->setNossoNumero($lineProperties[8])
+                        ->setBankNumber($lineProperties[9])
+                        ->setAgency($lineProperties[10])
+                        ->setAccount($lineProperties[11])
+                        ->setBarCode($lineProperties[12])
+                        ->setExpirationDate($lineProperties[13])
+                        ->setAmountInCents($lineProperties[14]);
                     ($lineProperties[15] == false) ? $boletoTransaction->setAmountPaidInCents($lineProperties[15]) : 0;
                     ($lineProperties[16] == false) ? $boletoTransaction->setPaymentDate($lineProperties[16]) : null;
                     ($lineProperties[17] == false) ? $boletoTransaction->setCreditDate($lineProperties[17]) : null;
@@ -488,32 +489,32 @@ class ApiClient
                 case "40":
                     $onlineDebitTransaction = new One\DataContract\TransactionReport\TransactionReportData\OnlineDebitTransaction();
                     $transactionReportOrder = new One\DataContract\TransactionReport\TransactionReportData\TransactionReportOrder();
-                    $transactionReportOrder->setOrderKey($lineProperties[1]);
-                    $transactionReportOrder->setOrderReference($lineProperties[2]);
-                    $transactionReportOrder->setMerchantKey($lineProperties[3]);
-                    $transactionReportOrder->setMerchantName($lineProperties[4]);
+                    $transactionReportOrder->setOrderKey($lineProperties[1])
+                        ->setOrderReference($lineProperties[2])
+                        ->setMerchantKey($lineProperties[3])
+                        ->setMerchantName($lineProperties[4]);
 
-                    $onlineDebitTransaction->setOrder($transactionReportOrder);
-                    $onlineDebitTransaction->setTransactionKey($lineProperties[5]);
-                    $onlineDebitTransaction->setTransactionReference($lineProperties[6]);
-                    $onlineDebitTransaction->setBank($lineProperties[7]);
-                    $onlineDebitTransaction->setStatus($lineProperties[8]);
-                    $onlineDebitTransaction->setAmountInCents($lineProperties[9]);
+                    $onlineDebitTransaction->setOrder($transactionReportOrder)
+                        ->setTransactionKey($lineProperties[5])
+                        ->setTransactionReference($lineProperties[6])
+                        ->setBank($lineProperties[7])
+                        ->setStatus($lineProperties[8])
+                        ->setAmountInCents($lineProperties[9]);
                     ($lineProperties[10] == false) ? $onlineDebitTransaction->setAmountPaidInCents($lineProperties[10]) : 0;
                     ($lineProperties[11] == false) ? $onlineDebitTransaction->setPaymentDate($lineProperties[11]) : null;
-                    $onlineDebitTransaction->setBankReturnCode($lineProperties[12]);
-                    $onlineDebitTransaction->setBankPaymentDate($lineProperties[13]);
-                    $onlineDebitTransaction->setSignature($lineProperties[14]);
-                    $onlineDebitTransaction->setTransactionKeyToBank($lineProperties[15]);
+                    $onlineDebitTransaction->setBankReturnCode($lineProperties[12])
+                        ->setBankPaymentDate($lineProperties[13])
+                        ->setSignature($lineProperties[14])
+                        ->setTransactionKeyToBank($lineProperties[15]);
 
                     $response->addOnlineDebitTransaction($onlineDebitTransaction);
                     break;
                 case "99":
                     $trailer = new One\DataContract\TransactionReport\TransactionReportData\Trailer();
-                    $trailer->setOrderDataCount($lineProperties[1]);
-                    $trailer->setCreditCardTransactionDataCount($lineProperties[2]);
-                    $trailer->setBoletoTransactionDataCount($lineProperties[3]);
-                    $trailer->setOnlineDebitTransactionDataCount($lineProperties[4]);
+                    $trailer->setOrderDataCount($lineProperties[1])
+                        ->setCreditCardTransactionDataCount($lineProperties[2])
+                        ->setBoletoTransactionDataCount($lineProperties[3])
+                        ->setOnlineDebitTransactionDataCount($lineProperties[4]);
                     $response->setTrailer($trailer);
                     break;
             }
