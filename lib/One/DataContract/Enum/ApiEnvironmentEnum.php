@@ -22,4 +22,9 @@ abstract class ApiEnvironmentEnum
      * Ambiente de testes
      */
     const INSPECTOR = 'inspector';
+
+    /**
+     * Api do transactionReport
+     */
+    const TRANSACTION_REPORT = 'transaction_report';
 }
