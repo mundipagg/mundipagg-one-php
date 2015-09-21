@@ -388,32 +388,30 @@ class ApiClient
 
     /**
      * @param $reportDate
-     * @throws \Exception
+     * @param $filePath
+     * @return string
      */
-    public function DownloadTransactionReportFile($reportDate)
+    public function DownloadTransactionReportFile($reportDate, $filePath)
     {
         $reportResponse = $this->reportFileImplementation(date('Ymd', strtotime($reportDate)));
 
         $fileName = 'TransactionReportFile-' . $reportDate . '.txt';
 
-        header("Content-Type: text/plain");
-        header('Content-Disposition: attachment; filename="' . $fileName . '"');
-        header("Content-Length: " . strlen($reportResponse));
+        $myFile = fopen($filePath . "\\" . $fileName, "w");
+        fwrite($myFile, $reportResponse);
+        fclose($myFile);
 
-        echo $reportResponse;
-        exit;
+        return '200 - OK';
     }
 
     /**
      * @param $reportDate
      */
-    public function searchTransactionReportFile($reportDate)
+    public function searchTransactionReportFile($reportFileData)
     {
-        $reportData = $this->reportFileImplementation(date('Ymd', strtotime($reportDate)));
-
         $response = new \MundiPagg\One\DataContract\TransactionReport\TransactionReport();
 
-        foreach (preg_split("/((\r?\n)|(\r\n?))/", $reportData) as $line) {
+        foreach (preg_split("/((\r?\n)|(\r\n?))/", $reportFileData) as $line) {
             $lineProperties = explode(',', $line);
 
             switch ($lineProperties[0]) {
@@ -523,7 +521,7 @@ class ApiClient
     }
 
 
-    public function ParseXmlToStatusNotification($xmlStatusNotification)
+    public function ParseXmlToNotification($xmlStatusNotification)
     {
         $statusNotification = xmlPostParseHelper::ParseFromXml($xmlStatusNotification);
 

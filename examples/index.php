@@ -229,7 +229,7 @@ try {
 
     $apiClient->setEnvironment(\MundiPagg\One\DataContract\Enum\ApiEnvironmentEnum::TRANSACTION_REPORT);
 
-    //$postObject = $apiClient->ParseXmlToStatusNotification($xmlToPost);
+    //$postObject = $apiClient->ParseXmlToNotification($xmlToPost);
 
     //echo '<pre>' . var_dump($postObject) . '<pre/>';
     $apiClient->DownloadTransactionReportFile('20150321');
