@@ -43,6 +43,11 @@ class CreateInstantBuyDataRequest extends BaseObject{
     protected $HolderName;
     
     /**
+     * @var string CPF do portador do cartão.
+     */
+    protected $HolderDocumentNumber;
+
+    /**
      * @var string 
      */
     protected $IsOneDollarAuthEnabled;
@@ -184,6 +189,25 @@ class CreateInstantBuyDataRequest extends BaseObject{
     public function getHolderName()
     {
         return $this->HolderName;
+    }
+
+    /**
+     * @param string $holderDocumentNumber
+     * @return $this
+     */
+    public function setHolderDocumentNumber($holderDocumentNumber)
+    {
+        $this->HolderDocumentNumber = $holderDocumentNumber;
+
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getHolderDocumentNumber()
+    {
+        return $this->HolderDocumentNumber;
     }
     
     /**
